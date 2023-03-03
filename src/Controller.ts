@@ -12,11 +12,7 @@ class Controller {
   }
 
   public async handler(request: SQSEvent, _ctx: Context): Promise<void> {
-    const bucket = process.env.FILE_BUCKET as unknown as string 
-    const path = process.env.FILE_PATH as unknown as string
-    const batchSize = process.env.BATCH_SIZE as unknown as number
-    const outputQueue = process.env.FILE_OUTPUT_QUEUE as unknown as string
-
+    const body = JSON.parse(request.Records[0].body)
     const tapError = (error: any) => {
       this.logger.error('ERROR: ', error)
       return
@@ -27,7 +23,7 @@ class Controller {
       return
     }
    
-    return this.mpi.parseExcelFileInBatches(bucket,path,batchSize,outputQueue)
+    return this.mpi.createAccount(body)
     .then(returnResponse)
     .catch(tapError)
   }

@@ -1,10 +1,10 @@
 {
-    "name": "mpi-migration-fetch-accounts",
+    "name": "mpi-migration-save-account",
     "version": "1.0.5",
-    "description": "SQS triggered  function to fetch MPI account file",
+    "description": "SQS triggered  function to save excel row data as new client account",
     "main": "./dist/index.js",
     "config": {
-        "name": "mpi-migration-fetch-accounts"
+        "name": "mpi-migration-save-account"
     },
     "scripts": {
         "clean": "rimraf \"functions/*\"",
@@ -35,6 +35,7 @@
         "bunyan-loggly": "^2.0.1",
         "cors": "^2.8.5",
         "dotenv": "^16.0.0",
+        "firebase-admin": "^11.5.0",
         "jwt-encode": "^1.0.1",
         "moment": "^2.29.1",
         "mysql": "2.18.1",

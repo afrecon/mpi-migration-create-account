@@ -71,19 +71,19 @@ class Client extends User{
 
   @OneToOne(() => Spouse, spouse => spouse.member, { cascade: true,  onDelete:'CASCADE',onUpdate:'CASCADE',  nullable:true })
   @JoinColumn()
-  spouse: Spouse;
+  spouse?: Spouse;
 
   @ManyToOne(() => PayrollGroup, group => group.clients, { cascade: true,  onDelete:'CASCADE',onUpdate:'CASCADE',nullable:true })
   @JoinColumn()
-  payrollGroup: PayrollGroup;
+  payrollGroup?: PayrollGroup;
 
   @OneToOne(() => KnowYourCustomer, kyc => kyc.client, { cascade: true, nullable:true })
   @JoinColumn()
-  kyc: KnowYourCustomer;
+  kyc?: KnowYourCustomer;
   
   @OneToOne(() => TermsAndConditions, terms => terms.client, { cascade: true,  onDelete:'CASCADE',onUpdate:'CASCADE', nullable:true})
   @JoinColumn()
-  terms: TermsAndConditions;
+  terms?: TermsAndConditions;
 
   @OneToMany(() => PolicyTransferRequest, terms => terms.mainMember, {  nullable:true})
   transferRequests?: PolicyTransferRequest;

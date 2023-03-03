@@ -18,6 +18,13 @@ const configuration: AppConfiguration = {
     service: process.env.LOGGER_SERVICE as unknown as string,
     logglyToken: process.env.LOGGER_LOGGLY_TOKEN as unknown as string,
     logglySubdomain: process.env.LOGGER_LOGGLY_SUBDOMAIN as unknown as string
+  },
+  twilio: {
+    accountSid: process.env.TWILIO_ACCOUNT_SID as unknown as string,
+    accountSecret: process.env.TWILIO_ACCOUNT_SECRET as unknown as string,
+    phoneNumber: process.env.TWILIO_PHONE_NUMBER as unknown as string,
+    serviceSid: process.env.TWILIO_SERVICE_SID as unknown as string,
+    allowSMS: process.env.SMS_NOTIFICATION_ENABLED as unknown as boolean
   }
   
 }
