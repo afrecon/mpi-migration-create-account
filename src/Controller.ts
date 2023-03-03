@@ -15,6 +15,7 @@ class Controller {
     const body = JSON.parse(request.Records[0].body)
     const tapError = (error: any) => {
       this.logger.error('ERROR: ', error)
+      console.error('FATAL ERR',error)
       return
     }
  

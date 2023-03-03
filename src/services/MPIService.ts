@@ -40,6 +40,7 @@ class MPIService {
     }
 
     async  createAccount(data:Employee) {
+      console.info('Data IN',data)
       const generatedPassword = this.generatePassword()
      
         let payrollGroups:PayrollGroup[]
@@ -69,6 +70,7 @@ class MPIService {
                   role =await this.getRole('External/Other')
                   break
           }
+          console.log('User Role',role?.id)
 
           return role
         }
@@ -119,7 +121,8 @@ class MPIService {
             published: true,
             role
           }
-          return await this.db.getRepository(Client).save(c)
+          console.log('Saving',c)
+          return this.db.getRepository(Client).save(c)
         }
         const getPayrollGroup = (ref:string)=>{
           let g:any = null
@@ -134,7 +137,9 @@ class MPIService {
         }
         const createKYC = async(_client:Client)=>{
           client  =_client
-          client.kyc=  await this.createKYCProfile(client)
+          client.kyc=  await this.createKYCProfile(client) 
+          client.identificationNumber = data.idNumber
+          console.log('KYC Created')
           return client
         }
 
@@ -157,6 +162,7 @@ class MPIService {
           }
         }
         const update = async(uid:string)=>{
+          console.log('Firebase RSP',uid)
           const repo = this.db.getRepository(Client)
           client.reference = uid
           return repo.save
@@ -165,6 +171,7 @@ class MPIService {
       
           return this.sms.sendMessage(`+267${client.contactNumber}`,`Dumelang ${client.firstname}! Welcome tothe MPI Portal. Please use the following details to login\n\nUsername:${client.emailAddress}\n\nPassword:${generatedPassword}\n\nPlease update you password once you login to keep your Account Secure`).then((res)=>{
               this.logger.info('SMS sent',res)
+              console.log('SMS SENT',client.contactNumber,client)
               return 
           })
       }
@@ -206,8 +213,9 @@ class MPIService {
     }
     const createIdProfile = async()=>{
       const ID:IdentityDetails={
-        idNumber: '',
+        idNumber: client.identificationNumber,
         type: IdentityType.OMANG,
+        
         fileId: 0,
         kyc
       }
