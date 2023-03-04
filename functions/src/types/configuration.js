@@ -17,6 +17,13 @@ const configuration = {
         service: process.env.LOGGER_SERVICE,
         logglyToken: process.env.LOGGER_LOGGLY_TOKEN,
         logglySubdomain: process.env.LOGGER_LOGGLY_SUBDOMAIN
+    },
+    twilio: {
+        accountSid: process.env.TWILIO_ACCOUNT_SID,
+        accountSecret: process.env.TWILIO_ACCOUNT_SECRET,
+        phoneNumber: process.env.TWILIO_PHONE_NUMBER,
+        serviceSid: process.env.TWILIO_SERVICE_SID,
+        allowSMS: process.env.SMS_NOTIFICATION_ENABLED
     }
 };
 exports.configuration = configuration;

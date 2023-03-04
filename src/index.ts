@@ -9,10 +9,18 @@ import { LoggerConfiguration } from "./models/configuration/logger-configuration
 //import { configuration } from "./types/configuration"
 import { SQSService } from "./services/SQSService"
 import { MPIService } from "./services/MPIService"
+import { DatabaseConnectionFactory } from "./factories/database-connection-factory"
+import { configuration } from "./types/configuration"
+import { SmsService } from "./services/sms-service"
+import { S3 } from "aws-sdk"
 
-
+import * as admin from 'firebase-admin'
+import { initializeApp } from 'firebase-admin/app';
+import { getAuth } from 'firebase-admin/auth';
  
 const region = process.env.AWS_REGION ?? 'us-west-2'
+const env = process.env.ENV ?? 'us-west-2'
+const bucket = process.env.FIREBASE_BUCKET ?? 'mpi-migration'
 const loggerConfig: LoggerConfiguration = {
   logglySubdomain: process.env.LOGGLY_SUBDOMAIN ?? 'info',
   logglyToken: process.env.LOGGLY_TOKEN ?? 'info',
@@ -23,13 +31,22 @@ const loggerFactory = new LoggerFactory(loggerConfig)
 
  
 export const handler = async (request: SQSEvent, ctx: Context): Promise<void> => {
+  const s3 = new S3({region});
+      
+  const s3Object = await s3.getObject({ Bucket: bucket, Key: `${env}.json` }).promise();
+  const firebase = initializeApp({
+    credential: admin.credential.cert(s3Object.Body as string),
+    storageBucket:process.env.STORAGE_BUCKET
+  });
+
+  const auth = getAuth(firebase)
   const rootLogger = loggerFactory.getNamedLogger('MPI_MIGRATION_ROOT')
   rootLogger.info('Currently executing function [send invoice] in : ')
  // Database
-// const database = await DatabaseConnectionFactory.getInstance(configuration.db).initialize()
-  
-   const service:SQSService = new SQSService(region)
-   const mpi = new MPIService(service,loggerFactory)
+ const database = await DatabaseConnectionFactory.getInstance(configuration.db).initialize()
+  const sms = new SmsService(configuration.twilio,loggerFactory)
+
+   const mpi = new MPIService(database,sms,auth,loggerFactory)
   const controller = new Controller(mpi,loggerFactory)
   return controller.handler(request, ctx)
 }

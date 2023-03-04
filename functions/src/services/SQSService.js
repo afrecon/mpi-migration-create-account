@@ -12,7 +12,6 @@ class SQSService {
             QueueUrl: topic
         };
         return this.sqs.sendMessage(params).promise().then((result) => {
-            console.log(result);
             return result.MessageId;
         });
     }

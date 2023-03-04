@@ -7,19 +7,18 @@ class Controller {
         this.logger = loggerFactory.getNamedLogger('mpi-migration-controller');
     }
     async handler(request, _ctx) {
-        const bucket = process.env.FILE_BUCKET;
-        const path = process.env.FILE_PATH;
-        const batchSize = process.env.BATCH_SIZE;
-        const outputQueue = process.env.FILE_OUTPUT_QUEUE;
+        console.log('INCOMING', request.Records);
+        const body = JSON.parse(request.Records[0].body);
         const tapError = (error) => {
             this.logger.error('ERROR: ', error);
+            console.error('FATAL ERR', error);
             return;
         };
         const returnResponse = async (result) => {
             this.logger.debug('Automation Successful', result);
             return;
         };
-        return this.mpi.parseExcelFileInBatches(bucket, path, batchSize, outputQueue)
+        return this.mpi.createAccount(body)
             .then(returnResponse)
             .catch(tapError);
     }
