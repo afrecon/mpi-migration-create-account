@@ -12,6 +12,7 @@ class Controller {
   }
 
   public async handler(request: SQSEvent, _ctx: Context): Promise<void> {
+    console.log('INCOMING',request.Records)
     const body = JSON.parse(request.Records[0].body)
     const tapError = (error: any) => {
       this.logger.error('ERROR: ', error)
