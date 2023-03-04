@@ -7,16 +7,13 @@ import { LoggerFactory } from "./factories/logger-factory"
 import { LoggerConfiguration } from "./models/configuration/logger-configuration"
 //import { DatabaseConnectionFactory } from "./factories/database-connection-factory"
 //import { configuration } from "./types/configuration"
-import { SQSService } from "./services/SQSService"
 import { MPIService } from "./services/MPIService"
 import { DatabaseConnectionFactory } from "./factories/database-connection-factory"
 import { configuration } from "./types/configuration"
 import { SmsService } from "./services/sms-service"
 import { S3 } from "aws-sdk"
 
-import * as admin from 'firebase-admin'
-import { initializeApp } from 'firebase-admin/app';
-import { getAuth } from 'firebase-admin/auth';
+import * as admin from 'firebase-admin' 
  
 const region = process.env.AWS_REGION ?? 'us-west-2'
 const env = process.env.ENV ?? 'us-west-2'
@@ -34,12 +31,12 @@ export const handler = async (request: SQSEvent, ctx: Context): Promise<void> =>
   const s3 = new S3({region});
       
   const s3Object = await s3.getObject({ Bucket: bucket, Key: `${env}.json` }).promise();
-  const firebase = initializeApp({
+  const firebase = admin.initializeApp({
     credential: admin.credential.cert(s3Object.Body as string),
     storageBucket:process.env.STORAGE_BUCKET
   });
 
-  const auth = getAuth(firebase)
+  const auth = firebase.auth()
   const rootLogger = loggerFactory.getNamedLogger('MPI_MIGRATION_ROOT')
   rootLogger.info('Currently executing function [send invoice] in : ')
  // Database
