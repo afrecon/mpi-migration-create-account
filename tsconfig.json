@@ -1,6 +1,6 @@
 {
-    "buildOnSave": false,
-    "compileOnSave": false,
+    "buildOnSave": true,
+    "compileOnSave": true,
     "compilerOptions": {
         "experimentalDecorators": true,
         "charset": "utf8",
@@ -16,8 +16,8 @@
         "noImplicitThis": true,
         "alwaysStrict": true,
         "preserveConstEnums": true,
-        "sourceMap": false,
-        "esModuleInterop": false,
+        "sourceMap": true,
+        "esModuleInterop": true,
         "outDir": "functions",
         "noImplicitReturns": true
     },

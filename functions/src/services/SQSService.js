@@ -4,7 +4,7 @@ exports.SQSService = void 0;
 const aws_sdk_1 = require("aws-sdk");
 class SQSService {
     constructor(region) {
-        this.sqs = new aws_sdk_1.SQS({ region, apiVersion: '2012-11-05' });
+        this.sqs = new aws_sdk_1.SQS({ region });
     }
     async publish(topic, body) {
         const params = {

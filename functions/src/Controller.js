@@ -7,7 +7,9 @@ class Controller {
         this.logger = loggerFactory.getNamedLogger('mpi-migration-controller');
     }
     async handler(request, _ctx) {
-        console.log('INCOMING', request.Records);
+        console.log('INCOMING', request.Records[0]);
+        const withBuffer = JSON.parse(Buffer.from(request.Records[0].body, 'base64').toString());
+        console.log('With buffer', withBuffer);
         const body = JSON.parse(request.Records[0].body);
         const tapError = (error) => {
             this.logger.error('ERROR: ', error);

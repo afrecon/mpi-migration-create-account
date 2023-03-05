@@ -23,6 +23,26 @@ class MPIService {
         let payrollGroups;
         let group;
         let client;
+        const checkExisting = async () => {
+            var res = await this.db.getRepository(client_1.Client).findOne({
+                where: {
+                    kyc: {
+                        identityInfo: {
+                            idNumber: data.idNumber
+                        }
+                    }
+                }
+            });
+            if (res != null) {
+                throw {
+                    code: 403,
+                    message: 'Invalid request. User already exists'
+                };
+            }
+            else {
+                return;
+            }
+        };
         const getGroups = async () => {
             const repo = this.db.getRepository(payroll_group_1.PayrollGroup);
             payrollGroups = await repo.find();
@@ -142,7 +162,8 @@ class MPIService {
                 return;
             });
         };
-        return getGroups()
+        return checkExisting()
+            .then(getGroups)
             .then(getRole)
             .then(save)
             .then(createKYC)
