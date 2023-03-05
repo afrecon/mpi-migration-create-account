@@ -3,6 +3,7 @@
     "compileOnSave": true,
     "compilerOptions": {
         "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "charset": "utf8",
         "module": "commonjs",
         "target": "es2018",

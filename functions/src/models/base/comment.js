@@ -5,6 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Comment = void 0;
 const enum_1 = require("./../../enums/enum");
@@ -20,59 +23,75 @@ const policy_claim_1 = require("../core/policy/policy-claim");
 let Comment = class Comment {
 };
 __decorate([
-    typeorm_1.PrimaryGeneratedColumn()
+    typeorm_1.PrimaryGeneratedColumn(),
+    __metadata("design:type", Number)
 ], Comment.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column()
+    typeorm_1.Column(),
+    __metadata("design:type", String)
 ], Comment.prototype, "description", void 0);
 __decorate([
-    typeorm_1.Column({ type: 'enum', enum: enum_1.CommentStatus, default: enum_1.CommentStatus.DELIVERED })
+    typeorm_1.Column({ type: 'enum', enum: enum_1.CommentStatus, default: enum_1.CommentStatus.DELIVERED }),
+    __metadata("design:type", String)
 ], Comment.prototype, "status", void 0);
 __decorate([
-    typeorm_1.Column({ type: 'enum', enum: enum_1.CommentType, nullable: true })
+    typeorm_1.Column({ type: 'enum', enum: enum_1.CommentType, nullable: true }),
+    __metadata("design:type", String)
 ], Comment.prototype, "type", void 0);
 __decorate([
-    typeorm_1.Column()
+    typeorm_1.Column(),
+    __metadata("design:type", Boolean)
 ], Comment.prototype, "highlight", void 0);
 __decorate([
-    typeorm_1.Column()
+    typeorm_1.Column(),
+    __metadata("design:type", Boolean)
 ], Comment.prototype, "published", void 0);
 __decorate([
-    typeorm_1.Column()
+    typeorm_1.Column(),
+    __metadata("design:type", Date)
 ], Comment.prototype, "date", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => client_1.Client, (user) => user.comments, { nullable: true }),
-    typeorm_1.JoinColumn()
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", client_1.Client)
 ], Comment.prototype, "user", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => scheme_application_1.SchemeApplication, (user) => user.comments, { nullable: true }),
-    typeorm_1.JoinColumn()
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", scheme_application_1.SchemeApplication)
 ], Comment.prototype, "application", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => policy_1.Policy, (user) => user.comments, { nullable: true }),
-    typeorm_1.JoinColumn()
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", policy_1.Policy)
 ], Comment.prototype, "policy", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => policy_transfer_request_1.PolicyTransferRequest, (user) => user.comments, { nullable: true }),
-    typeorm_1.JoinColumn()
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", policy_transfer_request_1.PolicyTransferRequest)
 ], Comment.prototype, "transfer", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => policy_amendment_1.PolicyAmendment, (user) => user.comments, { nullable: true }),
-    typeorm_1.JoinColumn()
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", policy_amendment_1.PolicyAmendment)
 ], Comment.prototype, "amendment", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => kyc_1.KnowYourCustomer, (user) => user.comments, { nullable: true }),
-    typeorm_1.JoinColumn()
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", kyc_1.KnowYourCustomer)
 ], Comment.prototype, "kyc", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => refund_1.PolicyRefund, (user) => user.comments, { nullable: true }),
-    typeorm_1.JoinColumn()
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", refund_1.PolicyRefund)
 ], Comment.prototype, "refund", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => policy_claim_1.PolicyClaim, (user) => user.comments, { nullable: true }),
-    typeorm_1.JoinColumn()
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", policy_claim_1.PolicyClaim)
 ], Comment.prototype, "claim", void 0);
 Comment = __decorate([
     typeorm_1.Entity()
 ], Comment);
 exports.Comment = Comment;
+//# sourceMappingURL=comment.js.map

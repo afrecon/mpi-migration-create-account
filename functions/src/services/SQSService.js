@@ -17,3 +17,4 @@ class SQSService {
     }
 }
 exports.SQSService = SQSService;
+//# sourceMappingURL=SQSService.js.map

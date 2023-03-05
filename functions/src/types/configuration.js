@@ -27,3 +27,4 @@ const configuration = {
     }
 };
 exports.configuration = configuration;
+//# sourceMappingURL=configuration.js.map

@@ -31,8 +31,9 @@ export const handler = async (request: SQSEvent, ctx: Context): Promise<void> =>
   const s3 = new S3({region});
       
   const s3Object = await s3.getObject({ Bucket: bucket, Key: `${env}.json` }).promise();
+  
   const firebase = admin.initializeApp({
-    credential: admin.credential.cert(s3Object.Body as string),
+    credential: admin.credential.cert(JSON.parse(s3Object.Body!.toString('utf-8'))),
     storageBucket:process.env.STORAGE_BUCKET
   });
 

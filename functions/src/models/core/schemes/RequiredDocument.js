@@ -5,6 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RequiredDocument = void 0;
 const typeorm_1 = require("typeorm");
@@ -13,18 +16,23 @@ const BTUScheme_1 = require("./BTUScheme");
 let RequiredDocument = class RequiredDocument extends table_1.DbTable {
 };
 __decorate([
-    typeorm_1.Column({ nullable: false })
+    typeorm_1.Column({ nullable: false }),
+    __metadata("design:type", String)
 ], RequiredDocument.prototype, "downloadUrl", void 0);
 __decorate([
-    typeorm_1.Column({ nullable: false })
+    typeorm_1.Column({ nullable: false }),
+    __metadata("design:type", String)
 ], RequiredDocument.prototype, "name", void 0);
 __decorate([
-    typeorm_1.Column({ nullable: false })
+    typeorm_1.Column({ nullable: false }),
+    __metadata("design:type", Boolean)
 ], RequiredDocument.prototype, "downloadable", void 0);
 __decorate([
-    typeorm_1.ManyToMany(type => BTUScheme_1.BTUScheme, { nullable: false })
+    typeorm_1.ManyToMany(type => BTUScheme_1.BTUScheme, { nullable: false }),
+    __metadata("design:type", Array)
 ], RequiredDocument.prototype, "applicableSchemes", void 0);
 RequiredDocument = __decorate([
     typeorm_1.Entity()
 ], RequiredDocument);
 exports.RequiredDocument = RequiredDocument;
+//# sourceMappingURL=RequiredDocument.js.map

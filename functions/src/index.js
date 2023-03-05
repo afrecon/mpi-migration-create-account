@@ -1,4 +1,23 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var _a, _b, _c, _d, _e, _f;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
@@ -10,7 +29,7 @@ const database_connection_factory_1 = require("./factories/database-connection-f
 const configuration_1 = require("./types/configuration");
 const sms_service_1 = require("./services/sms-service");
 const aws_sdk_1 = require("aws-sdk");
-const admin = require("firebase-admin");
+const admin = __importStar(require("firebase-admin"));
 const region = (_a = process.env.AWS_REGION) !== null && _a !== void 0 ? _a : 'us-west-2';
 const env = (_b = process.env.ENV) !== null && _b !== void 0 ? _b : 'us-west-2';
 const bucket = (_c = process.env.FIREBASE_BUCKET) !== null && _c !== void 0 ? _c : 'mpi-migration';
@@ -38,3 +57,4 @@ const handler = async (request, ctx) => {
     return controller.handler(request, ctx);
 };
 exports.handler = handler;
+//# sourceMappingURL=index.js.map

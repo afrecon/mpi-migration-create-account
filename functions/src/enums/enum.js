@@ -102,3 +102,4 @@ var TenancyType;
     TenancyType["Owner"] = "Owner";
     TenancyType["Lease"] = "Lease";
 })(TenancyType = exports.TenancyType || (exports.TenancyType = {}));
+//# sourceMappingURL=enum.js.map
