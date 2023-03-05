@@ -2,7 +2,7 @@ import { SQS } from 'aws-sdk'
 class SQSService {
     sqs: SQS
     constructor(region: string) {
-        this.sqs = new SQS({ region, apiVersion: '2012-11-05' })
+        this.sqs = new SQS({ region })
     }
 
     public async publish(topic: string, body: string): Promise<unknown> {
