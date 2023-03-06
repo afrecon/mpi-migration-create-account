@@ -4,6 +4,7 @@ const ZipPlugin = require('zip-webpack-plugin');
 module.exports = {
   entry: './src/index',
   mode: 'production',
+  minimize: false,
   module: {
     rules: [
       {
