@@ -12,9 +12,9 @@ class Controller {
   }
 
   public async handler(request: SQSEvent, _ctx: Context): Promise<void> {
-    console.log('INCOMING',request.Records[0])
-    const withBuffer = JSON.parse(Buffer.from(request.Records[0].body,'base64').toString())
-    console.log('With buffer',withBuffer)
+    console.log('INCOMING',request.Records[0].body)
+    // const withBuffer = JSON.parse(Buffer.from(request.Records[0].body,'base64').toString())
+    // console.log('With buffer',withBuffer)
     const body = JSON.parse(request.Records[0].body)
     const tapError = (error: any) => {
       this.logger.error('ERROR: ', error)
