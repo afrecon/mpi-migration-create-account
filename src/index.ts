@@ -34,9 +34,10 @@ export const handler = async (request: SQSEvent, ctx: Context): Promise<void> =>
   let firebase: admin.app.App
   try{
   firebase= admin.initializeApp({
+    
     credential: admin.credential.cert(JSON.parse(s3Object.Body!.toString('utf-8'))),
     storageBucket:process.env.STORAGE_BUCKET
-  });
+  },new Date().getTime().toString());
 }catch(e){
   firebase = admin.apps[0]!
 }
